@@ -19,14 +19,24 @@ $relativeTimeWithPlural = function ($number, $withoutSuffix, $key) use ($plural)
     if ($key === 'm') {
         return $withoutSuffix ? 'минута' : 'минуту';
     } else {
-        return $number . ' ' . $plural($format[$key], +$number);
+        return $number . ' ' . $plural($format[$key], $number);
     }
 };
 
 return array(
-    'months'        => explode('_', 'janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre'),
-    'monthsShort'   => explode('_', 'janv._févr._mars_avr._mai_juin_juil._août_sept._oct._nov._déc.'),
-    'weekdays'      => explode('_', 'lundi_mardi_mercredi_jeudi_vendredi_samedi_dimanche'),
+    'months' => array(
+        'format' => explode('_', 'Января_Февраля_Марта_Апреля_Мая_Июня_Июля_Августа_Сентября_Октября_Ноября_Декабря'),
+        'standalone' => explode('_', 'Январь_Февраль_Март_Апрель_Май_Июнь_Июль_Август_Сентябрь_Октябрь_Ноябрь_Декабрь')
+    ),
+    'monthsShort' => array(
+        'format' => explode('_', 'янв_фев_мар_апр_мая_июня_июля_авг_сен_окт_ноя_дек'),
+        'standalone' => explode('_', 'янв_фев_март_апр_май_июнь_июль_авг_сен_окт_ноя_дек')
+    ),
+    'weekdays' => array(
+        'standalone' => explode('_', 'Воскресенье_Понедельник_Вторник_Среда_Четверг_Пятница_Суббота'),
+        'format' => explode('_', 'Воскресенье_Понедельник_Вторник_Среду_Четверг_Пятницу_Субботу'),
+        'isFormat' => '/\[ ?[Вв] ?(?:прошлую|следующую|эту)? ?\] ?dddd/'
+    ),
     'weekdaysShort' => explode('_', 'Вс_Пн_Вт_Ср_Чт_Пт_Сб'),
     'calendar'      => array(
         'sameDay'  => '[Сегодня в] LT',
